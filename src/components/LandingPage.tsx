@@ -1,0 +1,61 @@
+import React from "react";
+import { Spotlight } from "@/components/ui/Spotlight";
+import { Poppins } from "next/font/google";
+import Navbar from "./Navbar";
+
+const poppin = Poppins({
+  subsets: ["latin"],
+  weight: ["400", "700"],
+});
+
+export default function LandingPage() {
+  return (
+    <div
+      className={`h-[98vh] w-full flex md:items-center md:justify-center bg-black/[0.96] antialiased bg-grid-white/[0.02] relative overflow-hidden ${poppin.className}`}
+    >
+      {/* Navbar */}
+      <Navbar />
+
+      <Spotlight
+        className="-top-40 left-0 md:left-60 md:-top-20"
+        fill="#4F47E5"
+      />
+
+      {/* Hero Section */}
+      <div className="flex flex-col justify-center items-center h-1/2 mt-20">
+        <div className="p-4 max-w-7xl mx-auto relative z-10 w-full pt-20 md:pt-0">
+          <h1 className="text-4xl sm:text-5xl md:text-7xl font-bold text-center bg-clip-text text-transparent bg-gradient-to-b from-neutral-50 to-neutral-400 bg-opacity-50">
+            LingoLab <br />
+            <div className="md:text-5xl">Talk to Learn. Learn to Talk.</div>
+          </h1>
+          <p className="mt-4 font-normal text-base sm:text-lg md:text-xl text-neutral-300 w-3/5 text-center mx-auto">
+            Lingo Lab is your go-to platform for learning languages through
+            real-time conversations with native speakers. No more boring
+            lessons—just live practice and cultural exchange!
+          </p>
+        </div>
+
+        {/* Login Button */}
+        <div className="flex justify-center items-center mt-4">
+          <button className="font-normal text-xl text-center bg-white dark:bg-white rounded-full h-14 w-48 text-black dark:text-black px-4 py-3 hover:bg-[#0A0A0A] hover:text-white hover:border-[#4F47E5] hover:border-2 flex items-center justify-center transition-colors duration-300 ease-in-out group">
+            Get Started
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              strokeWidth={2.0}
+              stroke="currentColor"
+              className="h-5 w-5 ml-2 transition-transform duration-500 ease-out group-hover:rotate-45"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="m4.5 19.5 15-15m0 0H8.25m11.25 0v11.25"
+              />
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+}
