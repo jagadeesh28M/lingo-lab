@@ -2,7 +2,7 @@ import React from "react";
 import { Playwrite_FR_Moderne, Poppins } from "next/font/google";
 import Link from "next/link";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
-import { ShimmerButton } from "./ui/shimmer-button";
+import { ShimmerButton } from "@/components/ui/shimmer-button";
 
 const playwrite = Playwrite_FR_Moderne({
   weight: ["400"],

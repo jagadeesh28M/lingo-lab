@@ -1,6 +1,6 @@
 import React from "react";
 import { Playwrite_FR_Moderne } from "next/font/google";
-import { ShimmerButton } from "./ui/shimmer-button";
+import { ShimmerButton } from "@/components/ui/shimmer-button";
 import Link from "next/link";
 
 const playwrite = Playwrite_FR_Moderne({
