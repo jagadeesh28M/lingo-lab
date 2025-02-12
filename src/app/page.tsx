@@ -1,11 +1,12 @@
-import LandingPage from "@/components/LandingPage";
+import HeroSection from "@/components/HeroSection";
 import HeroVideoDialog from "@/components/ui/HeroVideoDialog";
-import { WorldMap } from "@/components/ui/world-map";
 import { Poppins } from "next/font/google";
 import { AnimatedBeamDemo } from "@/components/MatchingBeam";
 import Image from "next/image";
-import communicate from "../assets/communication-Photoroom.jpg";
+import communicate from "../assets/communication.jpg";
+import world from "../assets/world.jpg";
 import Footer from "@/components/Footer";
+import WorkCard from "@/components/ui/WorkCard";
 
 const poppin = Poppins({
   subsets: ["latin"],
@@ -14,9 +15,9 @@ const poppin = Poppins({
 
 export default function Home() {
   return (
-    <main className="w-full h-full">
+    <main id="home" className="w-full h-full">
       <div>
-        <LandingPage />
+        <HeroSection />
       </div>
 
       <div className="relative h-auto w-full px-4 sm:px-6 md:px-12 lg:px-52 flex flex-col items-center justify-center bg-black/[0.96] antialiased bg-grid-white/[0.02]">
@@ -36,7 +37,11 @@ export default function Home() {
         />
       </div>
 
-      <div className="w-full h-auto bg-black/[0.96] dark:bg-white text-white dark:text-black flex flex-col items-center justify-center py-12 text-5xl">
+      {/* Features Section */}
+      <div
+        id="features"
+        className="w-full h-auto bg-black/[0.96] dark:bg-white text-white dark:text-black flex flex-col items-center justify-center py-12 text-5xl"
+      >
         <h1
           className={`text-4xl sm:text-5xl md:text-5xl font-bold text-center bg-clip-text text-transparent bg-gradient-to-b from-neutral-50 to-neutral-400 bg-opacity-50 mb-6 ${poppin.className}`}
         >
@@ -115,48 +120,19 @@ export default function Home() {
               <div className="text-base text-white mt-2 font-normal mb-2">
                 Connect with learners and native speakers worldwide
               </div>
-              <div className="w-full h-full">
-                <WorldMap
-                  dots={[
-                    {
-                      start: {
-                        lat: 64.2008,
-                        lng: -149.4937,
-                      }, // Alaska (Fairbanks)
-                      end: {
-                        lat: 34.0522,
-                        lng: -118.2437,
-                      }, // Los Angeles
-                    },
-                    {
-                      start: { lat: 64.2008, lng: -149.4937 }, // Alaska (Fairbanks)
-                      end: { lat: -15.7975, lng: -47.8919 }, // Brazil (Brasília)
-                    },
-                    {
-                      start: { lat: -15.7975, lng: -47.8919 }, // Brazil (Brasília)
-                      end: { lat: 38.7223, lng: -9.1393 }, // Lisbon
-                    },
-                    {
-                      start: { lat: 51.5074, lng: -0.1278 }, // London
-                      end: { lat: 28.6139, lng: 77.209 }, // New Delhi
-                    },
-                    {
-                      start: { lat: 28.6139, lng: 77.209 }, // New Delhi
-                      end: { lat: 43.1332, lng: 131.9113 }, // Vladivostok
-                    },
-                    {
-                      start: { lat: 28.6139, lng: 77.209 }, // New Delhi
-                      end: { lat: -1.2921, lng: 36.8219 }, // Nairobi
-                    },
-                  ]}
-                />
-              </div>
+              <Image
+                src={world}
+                alt="Communication"
+                className="w-full h-auto"
+              />
             </div>
           </div>
         </div>
       </div>
 
+      {/* How it Works */}
       <div
+        id="about"
         className={`w-full h-auto bg-black/[0.96] dark:bg-white text-white dark:text-black flex flex-col items-center justify-center py-4 text-5xl ${poppin.className}`}
       >
         <h1 className="mb-10 text-4xl sm:text-5xl md:text-5xl font-bold text-center bg-clip-text text-transparent bg-gradient-to-b from-neutral-50 to-neutral-400 bg-opacity-50">
@@ -164,40 +140,74 @@ export default function Home() {
         </h1>
         <div className="w-full px-4 sm:px-6 md:px-12 lg:px-52">
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
-            <div className="p-4 rounded-lg text-xl font-semibold text-white border border-white/[0.5] shadow-lg">
-              <h2 className="text-center">Step 1</h2>
-              <h4 className="text-center text-xl text-white mt-2 font-bold">
-                Choose Your Language
-              </h4>
-              <p className="text-base text-center text-white mt-2 font-normal">
-                Select from over 30 languages and find native speakers ready to
-                practice with you
-              </p>
-            </div>
-            <div className="p-4 rounded-lg text-xl font-semibold text-white border border-white/[0.5] shadow-lg">
-              <h2 className="text-center">Step 2</h2>
-              <h4 className="text-center text-xl text-white mt-2 font-bold">
-                Join a Practice Room
-              </h4>
-              <p className="text-base text-center text-white mt-2 font-normal">
-                Enter live practice rooms or schedule sessions with language
-                partners
-              </p>
-            </div>
-            <div className="p-4 rounded-lg text-xl font-semibold text-white border border-white/[0.5] shadow-lg">
-              <h2 className="text-center">Step 3</h2>
-              <h4 className="text-center text-xl text-white mt-2 font-bold">
-                Start Speaking
-              </h4>
-              <p className="text-base text-center text-white mt-2 font-normal">
-                Practice through natural conversations and receive instant
-                feedback
-              </p>
-            </div>
+            <WorkCard
+              Step={"Step 1"}
+              Title={"Choose Your Language"}
+              Description={
+                "Select from over 30 languages and find native speakers ready to practice with you"
+              }
+              icon={
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  strokeWidth={1.5}
+                  stroke="currentColor"
+                  className="size-6"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="m10.5 21 5.25-11.25L21 21m-9-3h7.5M3 5.621a48.474 48.474 0 0 1 6-.371m0 0c1.12 0 2.233.038 3.334.114M9 5.25V3m3.334 2.364C11.176 10.658 7.69 15.08 3 17.502m9.334-12.138c.896.061 1.785.147 2.666.257m-4.589 8.495a18.023 18.023 0 0 1-3.827-5.802"
+                  />
+                </svg>
+              }
+            />
+            <WorkCard
+              Step={"Step 2"}
+              Title={"Choose Your Language"}
+              Description={
+                "Select from over 30 languages and find native speakers ready to practice with you"
+              }
+              icon={
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 24 24"
+                  fill="currentColor"
+                  className="size-6"
+                >
+                  <path
+                    fillRule="evenodd"
+                    d="M8.25 6.75a3.75 3.75 0 1 1 7.5 0 3.75 3.75 0 0 1-7.5 0ZM15.75 9.75a3 3 0 1 1 6 0 3 3 0 0 1-6 0ZM2.25 9.75a3 3 0 1 1 6 0 3 3 0 0 1-6 0ZM6.31 15.117A6.745 6.745 0 0 1 12 12a6.745 6.745 0 0 1 6.709 7.498.75.75 0 0 1-.372.568A12.696 12.696 0 0 1 12 21.75c-2.305 0-4.47-.612-6.337-1.684a.75.75 0 0 1-.372-.568 6.787 6.787 0 0 1 1.019-4.38Z"
+                    clipRule="evenodd"
+                  />
+                  <path d="M5.082 14.254a8.287 8.287 0 0 0-1.308 5.135 9.687 9.687 0 0 1-1.764-.44l-.115-.04a.563.563 0 0 1-.373-.487l-.01-.121a3.75 3.75 0 0 1 3.57-4.047ZM20.226 19.389a8.287 8.287 0 0 0-1.308-5.135 3.75 3.75 0 0 1 3.57 4.047l-.01.121a.563.563 0 0 1-.373.486l-.115.04c-.567.2-1.156.349-1.764.441Z" />
+                </svg>
+              }
+            />
+            <WorkCard
+              Step={"Step 3"}
+              Title={"Start Speaking"}
+              Description={
+                "Practice through natural conversations and receive instant feedback from the speakers"
+              }
+              icon={
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 24 24"
+                  fill="currentColor"
+                  className="size-6"
+                >
+                  <path d="M4.913 2.658c2.075-.27 4.19-.408 6.337-.408 2.147 0 4.262.139 6.337.408 1.922.25 3.291 1.861 3.405 3.727a4.403 4.403 0 0 0-1.032-.211 50.89 50.89 0 0 0-8.42 0c-2.358.196-4.04 2.19-4.04 4.434v4.286a4.47 4.47 0 0 0 2.433 3.984L7.28 21.53A.75.75 0 0 1 6 21v-4.03a48.527 48.527 0 0 1-1.087-.128C2.905 16.58 1.5 14.833 1.5 12.862V6.638c0-1.97 1.405-3.718 3.413-3.979Z" />
+                  <path d="M15.75 7.5c-1.376 0-2.739.057-4.086.169C10.124 7.797 9 9.103 9 10.609v4.285c0 1.507 1.128 2.814 2.67 2.94 1.243.102 2.5.157 3.768.165l2.782 2.781a.75.75 0 0 0 1.28-.53v-2.39l.33-.026c1.542-.125 2.67-1.433 2.67-2.94v-4.286c0-1.505-1.125-2.811-2.664-2.94A49.392 49.392 0 0 0 15.75 7.5Z" />
+                </svg>
+              }
+            />
           </div>
         </div>
       </div>
 
+      {/* Footer Section */}
       <Footer />
     </main>
   );

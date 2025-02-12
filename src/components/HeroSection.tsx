@@ -8,7 +8,7 @@ const poppin = Poppins({
   weight: ["400", "700"],
 });
 
-export default function LandingPage() {
+export default function HeroSection() {
   return (
     <div
       className={`h-[98vh] w-full flex flex-col items-center justify-center bg-black/[0.96] antialiased bg-grid-white/[0.02] relative overflow-hidden ${poppin.className}`}
