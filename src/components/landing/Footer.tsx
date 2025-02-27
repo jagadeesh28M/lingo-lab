@@ -1,8 +1,10 @@
 "use client";
 import React from "react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 const Footer = () => {
+  const router = useRouter();
   return (
     <footer
       id="contact"
@@ -28,8 +30,14 @@ const Footer = () => {
             <li className="mb-2 text-gray-300 hover:text-blue-500">
               <Link href="#about">How it works</Link>
             </li>
-            <li className="mb-2 text-gray-300 hover:text-blue-500">
-              <Link href="#">Login</Link>
+            <li className="mb-2 text-gray-300 hover:text-blue-500 hover:cursor-pointer">
+              <div
+                onClick={() => {
+                  router.push("/signin");
+                }}
+              >
+                Login
+              </div>
             </li>
           </ul>
         </div>

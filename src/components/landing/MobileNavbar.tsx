@@ -2,7 +2,7 @@ import React from "react";
 import { Playwrite_FR_Moderne, Poppins } from "next/font/google";
 import Link from "next/link";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
-import { ShimmerButton } from "@/components/ui/shimmer-button";
+import MobileSigninButton from "../ui/MobileSigninButton";
 
 const playwrite = Playwrite_FR_Moderne({
   weight: ["400"],
@@ -74,9 +74,7 @@ function MobileNavbar() {
               Contact
             </Link>
             <div className="w-3/4 max-w-xs mt-6">
-              <ShimmerButton className="w-full py-3 text-xl">
-                <span className="text-white">Login</span>
-              </ShimmerButton>
+              <MobileSigninButton />
             </div>
           </div>
         </SheetContent>

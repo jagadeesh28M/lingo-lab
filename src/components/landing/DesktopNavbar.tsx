@@ -1,7 +1,7 @@
 import React from "react";
 import { Playwrite_FR_Moderne } from "next/font/google";
-import { ShimmerButton } from "@/components/ui/shimmer-button";
 import Link from "next/link";
+import DesktopSiginButton from "../ui/DesktopSiginButton";
 
 const playwrite = Playwrite_FR_Moderne({
   weight: ["400"],
@@ -43,11 +43,7 @@ function DesktopNavbar() {
             Contact
           </a>
         </div>
-        <ShimmerButton className="shadow-sm shadow-white w-32 hover:border-blue-500 transition-colors duration-300 ease-in-out">
-          <span className="whitespace-pre-wrap text-center text-sm font-medium leading-none tracking-tight text-white from-white to-slate-900/10 lg:text-lg  transition-colors duration-300 ease-in-out">
-            Login
-          </span>
-        </ShimmerButton>
+        <DesktopSiginButton />
       </div>
     </nav>
   );
