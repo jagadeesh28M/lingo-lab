@@ -1,6 +1,7 @@
 import { syncUser } from "@/actions/user.action";
 import { Sigmar } from "next/font/google";
 import UsernameSetup from "./UsernameSetup";
+import { getServerSession } from "next-auth";
 
 const sigmar = Sigmar({
   subsets: ["latin"],
@@ -8,8 +9,9 @@ const sigmar = Sigmar({
 });
 
 export default async function Navbar() {
+  const session = await getServerSession();
   const user = await syncUser();
-  if (user && "username" in user && user.username == "") {
+  if (user && "username" in user && user.username == session?.user?.name) {
     return <UsernameSetup />;
   }
   return (

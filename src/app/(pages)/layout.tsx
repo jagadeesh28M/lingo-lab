@@ -6,15 +6,9 @@ export default function Layout({
   children: React.ReactNode;
 }>) {
   return (
-    <>
-      <html lang="en">
-        <body>
-          <div className="min-h-screen">
-            <Navbar />
-            {children}
-          </div>
-        </body>
-      </html>
-    </>
+    <div className="min-h-screen">
+      <Navbar />
+      {children}
+    </div>
   );
 }

@@ -18,10 +18,10 @@ export async function syncUser() {
       email: session.user?.email ?? undefined,
     },
   });
-  if (userExist == null && session.user?.email) {
+  if (userExist == null && session.user?.email && session.user?.name) {
     const createUser = await prisma.user.create({
       data: {
-        username: "",
+        username: session.user.name,
         email: session.user?.email,
         image: session.user?.image,
       },
