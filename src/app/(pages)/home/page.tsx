@@ -1,12 +1,15 @@
 import { syncUser } from "@/actions/user.action";
-import UsernameSetup from "@/components/UsernameSetup";
 import { getServerSession } from "next-auth";
+import { redirect } from "next/navigation";
 
 export default async function Home() {
   const session = await getServerSession();
   const user = await syncUser();
+  if (!session) {
+    return redirect("/");
+  }
   if (user && "username" in user && user.username == session?.user?.name) {
-    return <UsernameSetup />;
+    return "";
   }
 
   return <div>HOME</div>;
