@@ -20,7 +20,6 @@ export default function UpdateUsername() {
     }
     fetchUsernames();
   }, []);
-  console.log(usernames);
 
   const handleSubmit = async () => {
     const update = await updateUsername({ username });

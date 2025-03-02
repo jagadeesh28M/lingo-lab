@@ -12,7 +12,7 @@ const sigmar = Sigmar({
 export default async function Navbar() {
   const session = await getServerSession();
   const user = await syncUser();
-  if (user && "username" in user && user.username == session?.user?.name) {
+  if (user && "username" in user && user.username.startsWith("temporary-")) {
     return <UsernameSetup />;
   }
   return (

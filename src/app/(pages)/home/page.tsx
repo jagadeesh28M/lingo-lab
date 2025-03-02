@@ -8,7 +8,7 @@ export default async function Home() {
   if (!session) {
     return redirect("/");
   }
-  if (user && "username" in user && user.username == session?.user?.name) {
+  if (user && "username" in user && user.username.startsWith("temporary-")) {
     return "";
   }
 

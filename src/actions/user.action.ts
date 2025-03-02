@@ -18,11 +18,19 @@ export async function syncUser() {
       email: session.user?.email ?? undefined,
     },
   });
-  if (userExist == null && session.user?.email && session.user?.name) {
+
+  if (!userExist && session.user?.email && session.user?.name) {
+    const nameParts = session.user?.name?.split(" ");
+    const username = nameParts
+      ? "temporary-" +
+        nameParts[0].toLowerCase() +
+        Math.floor(Math.random() * 1000)
+      : "temporary-" + Math.floor(Math.random() * 1000);
     const createUser = await prisma.user.create({
       data: {
-        username: session.user.name,
-        email: session.user?.email,
+        username: username,
+        email: session.user.email,
+        name: session.user.name,
         image: session.user?.image,
       },
     });
