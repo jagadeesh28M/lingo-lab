@@ -15,4 +15,18 @@ model User{
   image String?
   createdAt DateTime @default(now())
   modifiedAt DateTime @updatedAt
+
+  rooms Room[]
+}
+
+model Room{
+  id String @id @default(uuid())
+  language String
+  topic String
+  maxPeople Int
+  level String
+  ownerId String
+  owner User @relation(fields: [ownerId], references: [id],onDelete: Cascade)
+  createdAt DateTime @default(now())
+  modifiedAt DateTime @updatedAt
 }

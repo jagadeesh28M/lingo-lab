@@ -14,7 +14,7 @@ const handler = NextAuth({
   },
   callbacks: {
     async redirect({ baseUrl }) {
-      return `${baseUrl}/home`;
+      return `${baseUrl}/`;
     },
   },
 });

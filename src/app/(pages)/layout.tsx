@@ -1,4 +1,5 @@
 import Navbar from "@/components/Navbar";
+import StreamVideoProvider from "@/providers/StreamClientProvider";
 
 export default function Layout({
   children,
@@ -6,9 +7,13 @@ export default function Layout({
   children: React.ReactNode;
 }>) {
   return (
-    <div className="min-h-screen">
-      <Navbar />
-      {children}
-    </div>
+    <main>
+      <StreamVideoProvider>
+        <div className="min-h-screen">
+          <Navbar />
+          {children}
+        </div>
+      </StreamVideoProvider>
+    </main>
   );
 }

@@ -24,9 +24,9 @@ function UserIcon({ img }) {
               "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTDAW3c4VeojGKTpXQCtoLQG0_VWjzJwVdAEQ&s"
             }
             alt="User profile image"
-            width={80}
+            width={56}
             height={56}
-            className="h-auto w-auto mr-10 hover:cursor-pointer  rounded-full border-2 border-blue-400"
+            className="h-auto w-auto mr-10 hover:cursor-pointer  rounded-full border-2 border-blue-400 object-cover"
           />
         </DropdownMenuTrigger>
         <DropdownMenuContent

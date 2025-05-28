@@ -17,7 +17,7 @@ export default async function Navbar() {
     return <UsernameSetup />;
   }
   return (
-    <div className="w-auto h-20 bg-gray-800 border-b-white shadow-lg flex justify-between items-center">
+    <div className="w-auto h-20 bg-[#020617] border-b-white shadow-lg flex justify-between items-center">
       <Link
         href={"/home"}
         className={`text-[#4E8DF1] text-4xl ml-10 ${sigmar.className}`}

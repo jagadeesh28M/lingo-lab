@@ -40,7 +40,7 @@ export default function UsernameUpdate() {
         </label>
         <input
           id="username"
-          className="w-full rounded-md border border-gray-600 bg-gray-700 px-3 py-2 text-white placeholder:text-gray-400 focus:border-gray-500 focus:outline-none focus:ring-1 focus:ring-gray-500"
+          className="w-full rounded-md border border-gray-600 bg-gray-700 px-3 py-2 text-black placeholder:text-gray-400 focus:border-gray-500 focus:outline-none focus:ring-1 focus:ring-gray-500"
           placeholder="Enter your username"
           value={username}
           onChange={(e) => setUsername(e.target.value)}
@@ -67,7 +67,7 @@ export default function UsernameUpdate() {
           onClick={handleSubmit}
           disabled={containsSpaces || isDuplicate || username === ""}
         >
-          Save username
+          Update username
         </button>
       </div>
     </div>
