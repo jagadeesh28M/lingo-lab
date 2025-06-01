@@ -38,6 +38,9 @@ export async function getRooms() {
         },
       },
     },
+    orderBy: {
+      createdAt: "desc",
+    },
   });
   return rooms;
 }

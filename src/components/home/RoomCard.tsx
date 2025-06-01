@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useMemo } from "react";
 import { Users, Languages, Mic, User, Sparkles } from "lucide-react";
 import { motion } from "motion/react";
 import Button from "../ui/JoinButton";
@@ -17,6 +17,23 @@ export interface RoomProps {
   isLive: boolean;
 }
 
+// Utility to pick a random gradient
+const getRandomGradient = () => {
+  const gradients = [
+    "from-pink-500 to-yellow-500",
+    "from-blue-500 to-teal-500",
+    "from-green-500 to-emerald-500",
+    "from-purple-600 to-pink-600",
+    "from-orange-500 to-red-500",
+    "from-indigo-600 to-cyan-600",
+    "from-teal-500 to-lime-500",
+    "from-amber-600 to-rose-500",
+    "from-red-600 to-purple-600",
+    "from-fuchsia-500 to-indigo-500",
+  ];
+  return gradients[Math.floor(Math.random() * gradients.length)];
+};
+
 const RoomCard: React.FC<RoomProps> = ({
   topic,
   language,
@@ -25,26 +42,7 @@ const RoomCard: React.FC<RoomProps> = ({
   hostName,
   isLive,
 }) => {
-  // Generate a dynamic gradient based on language
-  const getLanguageGradient = (lang: string) => {
-    const gradients = {
-      Spanish: "from-amber-600 to-red-600",
-      French: "from-blue-600 to-indigo-600",
-      Japanese: "from-red-600 to-pink-600",
-      German: "from-yellow-600 to-amber-600",
-      Mandarin: "from-red-600 to-orange-600",
-      Korean: "from-blue-600 to-cyan-600",
-      Italian: "from-green-600 to-emerald-600",
-      Portuguese: "from-green-600 to-teal-600",
-      Russian: "from-red-600 to-rose-600",
-      Arabic: "from-emerald-600 to-green-600",
-    };
-
-    return (
-      gradients[lang as keyof typeof gradients] ||
-      "from-indigo-600 to-violet-600"
-    );
-  };
+  const randomGradient = useMemo(() => getRandomGradient(), []);
 
   return (
     <motion.div
@@ -55,9 +53,7 @@ const RoomCard: React.FC<RoomProps> = ({
     >
       {/* Glow effect */}
       <div
-        className={`absolute -inset-0.5 bg-gradient-to-r ${getLanguageGradient(
-          language
-        )} rounded-2xl opacity-0 group-hover:opacity-30 blur transition-all duration-500`}
+        className={`absolute -inset-0.5 bg-gradient-to-r ${randomGradient} rounded-2xl opacity-0 group-hover:opacity-30 blur transition-all duration-500`}
       />
 
       {/* Card content */}
@@ -65,9 +61,7 @@ const RoomCard: React.FC<RoomProps> = ({
         {/* Language banner */}
         <div className="relative h-20 overflow-hidden">
           <div
-            className={`absolute inset-0 bg-gradient-to-r ${getLanguageGradient(
-              language
-            )} opacity-20`}
+            className={`absolute inset-0 bg-gradient-to-r ${randomGradient} opacity-20`}
           />
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_120%,rgba(0,0,0,0)_30%,rgba(0,0,0,0.8)_100%)]" />
 
