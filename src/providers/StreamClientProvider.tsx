@@ -28,11 +28,11 @@ const StreamVideoProvider = ({ children }: { children: ReactNode }) => {
     const userDataFromDb = async () => {
       try {
         const user = await fetchUser();
-        if (!user) {
-          console.warn("No user data found");
+        if (!user || typeof user !== "object" || "redirect" in user) {
+          console.warn("No user data found or user is a redirect object");
           return;
         } else {
-          setUserData(user);
+          setUserData(user as UserInfo);
         }
         setLoading(false);
       } catch (error) {

@@ -3,13 +3,20 @@ import prisma from "@/lib/prisma";
 import { fetchUser } from "./user.action";
 
 interface Room {
+  roomId: string;
   language: string;
   topic: string;
   maxPeople: number;
   level: string;
 }
 
-export async function createRoom({ language, topic, maxPeople, level }: Room) {
+export async function createRoom({
+  roomId,
+  language,
+  topic,
+  maxPeople,
+  level,
+}: Room) {
   const user = await fetchUser();
   if (!user || !("id" in user)) {
     throw new Error("User not found or redirected");
@@ -17,6 +24,7 @@ export async function createRoom({ language, topic, maxPeople, level }: Room) {
   const { id } = user;
   const room = await prisma.room.create({
     data: {
+      id: roomId,
       language,
       topic,
       maxPeople,

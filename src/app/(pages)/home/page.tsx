@@ -10,7 +10,6 @@ export default async function Home() {
   const session = await getServerSession();
   const user = await syncUser();
   const rooms = await getRooms();
-  console.log("Rooms:", rooms);
   if (!session) {
     return redirect("/");
   }

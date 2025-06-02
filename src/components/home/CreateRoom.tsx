@@ -3,6 +3,7 @@ import React from "react";
 import { Plus } from "lucide-react";
 import { useState } from "react";
 import { createRoom } from "@/actions/room.action";
+import useMeetingActions from "@/hooks/useRoomActions";
 
 function CreateRoom() {
   const [newRoom, setNewRoom] = useState(false);
@@ -11,18 +12,39 @@ function CreateRoom() {
   const [level, setLevel] = useState<string>("Any Level");
   const [maxPeople, setMaxPeople] = useState<number>(0);
 
+  const { createInstantMeeting } = useMeetingActions();
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    const response = await createRoom({
-      language: languages,
-      topic: topic,
-      maxPeople: maxPeople,
-      level: level,
-    });
-    if (response) {
-      setNewRoom(false);
+
+    try {
+      const callId = await createInstantMeeting();
+
+      if (!callId) {
+        console.error("No callId returned from createInstantMeeting");
+        return;
+      }
+
+      console.log("Creating room with callId:", callId);
+      const response = await createRoom({
+        roomId: callId,
+        language: languages,
+        topic: topic,
+        maxPeople: maxPeople,
+        level: level,
+      });
+      console.log("Response from createRoom:", response);
+      if (response) {
+        console.log("Room created successfully", response);
+        setNewRoom(false);
+      } else {
+        console.error("createRoom returned no response");
+      }
+    } catch (error) {
+      console.error("Error in handleSubmit:", error);
     }
   };
+
   return (
     <div>
       <div
@@ -99,7 +121,7 @@ function CreateRoom() {
                   <select
                     className="block w-full rounded-md border-blue-600 border-2 shadow-sm focus:border-blue-500 focus:ring-blue-500 p-3 text-white bg-[#313F53]"
                     defaultValue="any"
-                    onChange={(e) => setMaxPeople(Number(e.target.value))}
+                    // onChange={(e) => setMaxPeople(Number(e.target.value))}
                   >
                     <option value="any">Unlimited</option>
                     <option value="1">1</option>
