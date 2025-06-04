@@ -13,7 +13,9 @@ import Loader from "@/components/Loader";
 const MeetingPage = () => {
   const { id } = useParams();
   const { data: user } = useSession();
-  const { call, isCallLoading } = useGetCallById(id);
+
+  const { call, isCallLoading } = useGetCallById(id ?? "");
+
   const [isSetupComplete, setIsSetupComplete] = useState(false);
 
   if (!user || isCallLoading) return <Loader />;
