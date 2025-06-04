@@ -1,5 +1,15 @@
 import Navbar from "@/components/Navbar";
 import StreamVideoProvider from "../../../providers/StreamClientProvider";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Lingo Lab",
+  description:
+    "A go-to platform for learning languages through real-time conversations",
+  icons: {
+    icon: "/public/logo.svg",
+  },
+};
 
 export default function Layout({
   children,
