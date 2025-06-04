@@ -4,6 +4,7 @@ import { Users, Languages, Mic, User, Sparkles } from "lucide-react";
 import { motion } from "motion/react";
 import Button from "../ui/JoinButton";
 import { toast } from "sonner";
+import { useRouter } from "next/navigation";
 
 export interface RoomProps {
   id: string;
@@ -44,6 +45,7 @@ const RoomCard: React.FC<RoomProps> = ({
   isLive,
 }) => {
   const randomGradient = useMemo(() => getRandomGradient(), []);
+  const router = useRouter();
 
   return (
     <motion.div
@@ -138,6 +140,7 @@ const RoomCard: React.FC<RoomProps> = ({
               glowing={isLive}
               className="gap-1.5"
               onClick={() => {
+                router.push(`/room/${id}`);
                 toast.success("Joined the room!");
               }}
             >
