@@ -14,7 +14,7 @@ function CreateRoom() {
   const [languages, setLanguages] = useState<string>("");
   const [topic, setTopic] = useState<string>("");
   const [level, setLevel] = useState<string>("Any Level");
-  const [maxPeople, setMaxPeople] = useState<number>(0);
+  // const [maxPeople, setMaxPeople] = useState<number>(0);
   const user = getSession();
 
   const client = useStreamVideoClient();
@@ -42,7 +42,7 @@ function CreateRoom() {
         roomId: callId,
         language: languages,
         topic: topic,
-        maxPeople: maxPeople,
+        maxPeople: 10,
         level: level,
       });
 
