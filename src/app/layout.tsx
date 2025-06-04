@@ -2,6 +2,7 @@ import { Metadata } from "next";
 import "./globals.css";
 import { Providers } from "./providers";
 import { Toaster } from "@/components/ui/sonner";
+import { Analytics } from "@vercel/analytics/next";
 import "@stream-io/video-react-sdk/dist/css/styles.css";
 
 export const metadata: Metadata = {
@@ -25,6 +26,7 @@ export default function RootLayout({
           {children}
           <Toaster richColors />
         </Providers>
+        <Analytics />
       </body>
     </html>
   );
