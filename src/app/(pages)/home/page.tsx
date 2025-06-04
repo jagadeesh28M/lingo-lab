@@ -1,7 +1,7 @@
-import { getRooms } from "@/actions/room.action";
+// import { getRooms } from "@/actions/room.action";
 import { syncUser } from "@/actions/user.action";
 import CreateRoom from "@/components/home/CreateRoom";
-import RoomCard from "@/components/home/RoomCard";
+// import RoomCard from "@/components/home/RoomCard";
 import SearchFilter from "@/components/home/SearchFIlter";
 import { getServerSession } from "next-auth";
 import { redirect } from "next/navigation";
@@ -9,7 +9,7 @@ import { redirect } from "next/navigation";
 export default async function Home() {
   const session = await getServerSession();
   const user = await syncUser();
-  const rooms = await getRooms();
+  // const rooms = await getRooms();
   if (!session) {
     return redirect("/");
   }
@@ -28,7 +28,7 @@ export default async function Home() {
       <SearchFilter></SearchFilter>
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 px-4 md:px-10">
         <CreateRoom />
-        {rooms.map((room) => (
+        {/* {rooms.map((room) => (
           <RoomCard
             key={room.id}
             id={room.id}
@@ -43,9 +43,9 @@ export default async function Home() {
             hostName={room.owner.name}
             isLive={true}
           />
-        ))}
+        ))} */}
 
-        {/* Example Room Card for testing */}
+        {/* Example Room Card for testing
         <RoomCard
           id="adsfadsf"
           topic="Spanish Conversation"
@@ -54,7 +54,7 @@ export default async function Home() {
           participants={{ current: 5, max: 10 }}
           hostName="John Doe"
           isLive={true}
-        />
+        /> */}
       </div>
     </div>
   );

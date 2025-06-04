@@ -1,5 +1,5 @@
 import Navbar from "@/components/Navbar";
-import StreamVideoProvider from "@/providers/StreamClientProvider";
+import StreamVideoProvider from "../../../providers/StreamClientProvider";
 
 export default function Layout({
   children,

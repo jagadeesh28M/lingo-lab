@@ -3,7 +3,6 @@ import React, { useMemo } from "react";
 import { Users, Languages, Mic, User, Sparkles } from "lucide-react";
 import { motion } from "motion/react";
 import Button from "../ui/JoinButton";
-import useMeetingActions from "@/hooks/useRoomActions";
 import { toast } from "sonner";
 
 export interface RoomProps {
@@ -46,7 +45,6 @@ const RoomCard: React.FC<RoomProps> = ({
   isLive,
 }) => {
   const randomGradient = useMemo(() => getRandomGradient(), []);
-  const { joinMeeting } = useMeetingActions();
 
   return (
     <motion.div
@@ -141,7 +139,6 @@ const RoomCard: React.FC<RoomProps> = ({
               glowing={isLive}
               className="gap-1.5"
               onClick={() => {
-                joinMeeting(id);
                 toast.success("Joined the room!");
               }}
             >

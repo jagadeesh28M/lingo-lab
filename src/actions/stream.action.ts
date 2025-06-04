@@ -16,12 +16,13 @@ export const tokenProvider = async () => {
     if (!apiKey) throw new Error("Api key is missing");
     if (!apiSecret) throw new Error("No api secret");
 
-    const client = new StreamClient(apiKey, apiSecret);
-    const validity = 60 * 60;
-    const token = client.generateUserToken({
-      user_id: user.id,
-      validity_in_seconds: validity,
-    });
+    const streamClient = new StreamClient(apiKey, apiSecret);
+
+    const expirationTime = Math.floor(Date.now() / 1000) + 3600;
+    const issuedAt = Math.floor(Date.now() / 1000) - 60;
+
+    const token = streamClient.createToken(user.id, expirationTime, issuedAt);
+
     return token;
   } else {
     throw new Error("User is not logged in");

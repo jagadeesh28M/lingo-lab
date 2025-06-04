@@ -1,6 +1,7 @@
 import "./globals.css";
 import { Providers } from "./providers";
 import { Toaster } from "@/components/ui/sonner";
+import "@stream-io/video-react-sdk/dist/css/styles.css";
 
 export default function RootLayout({
   children,

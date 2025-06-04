@@ -3,29 +3,41 @@ import React from "react";
 import { Plus } from "lucide-react";
 import { useState } from "react";
 import { createRoom } from "@/actions/room.action";
-import useMeetingActions from "@/hooks/useRoomActions";
+import { getSession } from "next-auth/react";
+import { useStreamVideoClient } from "@stream-io/video-react-sdk";
+import { toast } from "sonner";
+import { useRouter } from "next/navigation";
 
 function CreateRoom() {
+  const route = useRouter();
   const [newRoom, setNewRoom] = useState(false);
   const [languages, setLanguages] = useState<string>("");
   const [topic, setTopic] = useState<string>("");
   const [level, setLevel] = useState<string>("Any Level");
   const [maxPeople, setMaxPeople] = useState<number>(0);
+  const user = getSession();
 
-  const { createInstantMeeting } = useMeetingActions();
+  const client = useStreamVideoClient();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
+    if (!client || !user) {
+      console.error("Client or user session not available");
+      return;
+    }
+
     try {
-      const callId = await createInstantMeeting();
+      const callId = crypto.randomUUID();
+      const call = client.call("default", callId);
 
-      if (!callId) {
-        console.error("No callId returned from createInstantMeeting");
-        return;
+      if (!call) throw new Error("Failed to create call");
+
+      const createdCall = await call.create();
+
+      if (createdCall) {
+        route.push(`/room/${call.id}`);
       }
-
-      console.log("Creating room with callId:", callId);
       const response = await createRoom({
         roomId: callId,
         language: languages,
@@ -33,9 +45,10 @@ function CreateRoom() {
         maxPeople: maxPeople,
         level: level,
       });
-      console.log("Response from createRoom:", response);
+
       if (response) {
         console.log("Room created successfully", response);
+        toast.success("Room created successfully!");
         setNewRoom(false);
       } else {
         console.error("createRoom returned no response");
