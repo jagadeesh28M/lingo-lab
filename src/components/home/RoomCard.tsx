@@ -18,7 +18,6 @@ export interface RoomProps {
   isLive: boolean;
 }
 
-// Utility to pick a random gradient
 const getRandomGradient = () => {
   const gradients = [
     "from-pink-500 to-yellow-500",

@@ -3,11 +3,13 @@
 import { useCall, useCallStateHooks } from "@stream-io/video-react-sdk";
 
 import { Button } from "../ui/button";
-import { useRouter } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
+import { deleteRoom } from "@/actions/room.action";
 
 const EndCallButton = () => {
   const call = useCall();
   const router = useRouter();
+  const { id } = useParams();
 
   if (!call)
     throw new Error(
@@ -25,7 +27,15 @@ const EndCallButton = () => {
   if (!isMeetingOwner) return null;
 
   const endCall = async () => {
+    // Disable microphone and camera to turn off hardware
+    await call.microphone.disable();
+    await call.camera.disable();
     await call.endCall();
+    if (typeof id === "string") {
+      await deleteRoom(id);
+    } else {
+      throw new Error("Invalid room id");
+    }
     router.push("/home");
   };
 

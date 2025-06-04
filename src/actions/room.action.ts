@@ -52,3 +52,12 @@ export async function getRooms() {
   });
   return rooms;
 }
+
+export async function deleteRoom(roomId: string) {
+  const closeRoom = await prisma.room.delete({
+    where: {
+      id: roomId,
+    },
+  });
+  return closeRoom;
+}
