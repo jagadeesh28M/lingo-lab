@@ -6,6 +6,7 @@ interface Room {
   roomId: string;
   language: string;
   topic: string;
+  people: number;
   maxPeople: number;
   level: string;
 }
@@ -27,9 +28,37 @@ export async function createRoom({
       id: roomId,
       language,
       topic,
+      people: 0,
       maxPeople,
       level,
       ownerId: id,
+    },
+  });
+  return room;
+}
+
+export async function updatePeopleCount(roomId: string, increment: boolean) {
+  const room = await prisma.room.update({
+    where: {
+      id: roomId,
+    },
+    data: {
+      people: {
+        increment: increment ? 1 : -1,
+      },
+    },
+  });
+  return room;
+}
+
+export async function getRoomById(roomId: string) {
+  const room = await prisma.room.findUnique({
+    where: {
+      id: roomId,
+    },
+    select: {
+      maxPeople: true,
+      people: true,
     },
   });
   return room;

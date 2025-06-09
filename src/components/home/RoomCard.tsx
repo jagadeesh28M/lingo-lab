@@ -68,7 +68,6 @@ const RoomCard: React.FC<RoomProps> = ({
           />
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_120%,rgba(0,0,0,0)_30%,rgba(0,0,0,0.8)_100%)]" />
 
-          {/* Live indicator */}
           {isLive && (
             <div className="absolute top-4 right-4 flex items-center gap-1.5">
               <span className="flex h-2.5 w-2.5">
@@ -135,16 +134,29 @@ const RoomCard: React.FC<RoomProps> = ({
             </div>
 
             <Button
-              variant={isLive ? "primary" : "outline"}
+              variant={
+                participants.current === participants.max
+                  ? "outline"
+                  : isLive
+                  ? "primary"
+                  : "outline"
+              }
               size="sm"
-              glowing={isLive}
+              glowing={isLive && participants.current !== participants.max}
               className="gap-1.5"
+              disabled={participants.current === participants.max}
               onClick={() => {
+                if (participants.current >= participants.max) return;
                 router.push(`/room/${id}`);
                 toast.success("Joined the room!");
               }}
             >
-              {isLive ? (
+              {participants.current === participants.max ? (
+                <>
+                  <Sparkles size={14} />
+                  <span>Room is Full</span>
+                </>
+              ) : isLive ? (
                 <>
                   <Mic size={14} />
                   <span>Join Now</span>

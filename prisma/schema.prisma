@@ -23,6 +23,7 @@ model Room{
   id String @id @default(uuid())
   language String
   topic String
+  people Int @default(0)
   maxPeople Int
   level String
   ownerId String

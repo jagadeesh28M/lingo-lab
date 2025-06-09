@@ -36,8 +36,7 @@ export default async function Home() {
             language={room.language}
             level={room.level}
             participants={{
-              // current: room.participants.length,
-              current: 0,
+              current: room.people,
               max: room.maxPeople,
             }}
             hostName={room.owner.name}

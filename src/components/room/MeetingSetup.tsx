@@ -6,6 +6,7 @@ import {
   useCall,
 } from "@stream-io/video-react-sdk";
 import { Button } from "../ui/button";
+import { updatePeopleCount } from "@/actions/room.action";
 
 const MeetingSetup = ({
   setIsSetupComplete,
@@ -49,7 +50,8 @@ const MeetingSetup = ({
       </div>
       <Button
         className="rounded-md bg-green-500 hover:bg-green-700 px-4 py-2.5"
-        onClick={() => {
+        onClick={async () => {
+          await updatePeopleCount(call.id, true);
           call.join();
 
           setIsSetupComplete(true);

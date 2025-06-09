@@ -11,6 +11,7 @@ import {
 } from "@stream-io/video-react-sdk";
 import { useRouter, useSearchParams } from "next/navigation";
 import { Users, LayoutList } from "lucide-react";
+import { useCall } from "@stream-io/video-react-sdk";
 
 import {
   DropdownMenu,
@@ -22,6 +23,7 @@ import {
 import Loader from "../Loader";
 import EndCallButton from "./EndCallButton";
 import { cn } from "@/lib/utils";
+import { updatePeopleCount } from "@/actions/room.action";
 
 type CallLayoutType = "grid" | "speaker-left" | "speaker-right";
 
@@ -32,6 +34,7 @@ const MeetingRoom = () => {
   const [layout, setLayout] = useState<CallLayoutType>("speaker-left");
   const [showParticipants, setShowParticipants] = useState(false);
   const { useCallCallingState } = useCallStateHooks();
+  const call = useCall();
 
   const callingState = useCallCallingState();
 
@@ -67,7 +70,15 @@ const MeetingRoom = () => {
       </div>
       {/* video layout and call controls */}
       <div className="fixed bottom-0 flex w-full items-center justify-center gap-5">
-        <CallControls onLeave={() => router.push(`/`)} />
+        <CallControls
+          onLeave={async () => {
+            if (call) {
+              const roomId = call.id;
+              await updatePeopleCount(roomId, false);
+            }
+            router.push(`/`);
+          }}
+        />
 
         <DropdownMenu>
           <div className="flex items-center">

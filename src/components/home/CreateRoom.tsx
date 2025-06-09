@@ -14,7 +14,7 @@ function CreateRoom() {
   const [languages, setLanguages] = useState<string>("");
   const [topic, setTopic] = useState<string>("");
   const [level, setLevel] = useState<string>("Any Level");
-  // const [maxPeople, setMaxPeople] = useState<number>(0);
+  const [maxPeople, setMaxPeople] = useState<number>(0);
   const user = getSession();
 
   const client = useStreamVideoClient();
@@ -42,7 +42,8 @@ function CreateRoom() {
         roomId: callId,
         language: languages,
         topic: topic,
-        maxPeople: 10,
+        people: 0,
+        maxPeople: maxPeople,
         level: level,
       });
 
@@ -134,7 +135,7 @@ function CreateRoom() {
                   <select
                     className="block w-full rounded-md border-blue-600 border-2 shadow-sm focus:border-blue-500 focus:ring-blue-500 p-3 text-white bg-[#313F53]"
                     defaultValue="any"
-                    // onChange={(e) => setMaxPeople(Number(e.target.value))}
+                    onChange={(e) => setMaxPeople(Number(e.target.value))}
                   >
                     <option value="any">Unlimited</option>
                     <option value="1">1</option>
