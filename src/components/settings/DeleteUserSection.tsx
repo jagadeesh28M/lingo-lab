@@ -21,7 +21,7 @@ export default function DeleteUserSection() {
       return;
     }
     toast.success("Account deleted successfully.");
-    router.push("/");
+    router.push("/signin");
     setIsDeleting(false);
     setShowConfirmation(false);
     setConfirmText("");
