@@ -7,7 +7,7 @@ export const metadata: Metadata = {
   description:
     "A go-to platform for learning languages through real-time conversations",
   icons: {
-    icon: "/public/logo.svg",
+    icon: "/favicon.ico",
   },
 };
 

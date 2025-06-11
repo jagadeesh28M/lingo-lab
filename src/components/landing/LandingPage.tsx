@@ -3,8 +3,8 @@ import HeroVideoDialog from "@/components/ui/HeroVideoDialog";
 import { Poppins } from "next/font/google";
 import { AnimatedBeamDemo } from "@/components/landing/MatchingBeam";
 import Image from "next/image";
-import communicate from "../../public/communication.jpg";
-import world from "../../public/world.jpg";
+import communicate from "../../assets/communication.jpg";
+import world from "../../assets/world.jpg";
 import Footer from "@/components/landing/Footer";
 import WorkCard from "@/components/ui/WorkCard";
 
