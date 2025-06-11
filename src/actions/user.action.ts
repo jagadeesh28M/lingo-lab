@@ -104,3 +104,25 @@ export async function updateUsername({ username }: { username: string }) {
     });
   }
 }
+
+export async function deleteUser() {
+  const user = await fetchUser();
+  if (!user || !("id" in user)) {
+    throw new Error("User not found or redirected");
+  }
+  const { id } = user;
+  try {
+    const deletedUser = await prisma.user.delete({
+      where: {
+        id: id,
+      },
+    });
+    return deletedUser;
+  } catch (error) {
+    console.log(error);
+    return NextResponse.json({
+      status: 404,
+      msg: "Error deleting the user",
+    });
+  }
+}

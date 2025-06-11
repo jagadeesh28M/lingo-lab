@@ -1,3 +1,4 @@
+import DeleteUserSection from "@/components/settings/DeleteUserSection";
 import SettingsCard from "@/components/settings/SettingsCard";
 import { Info } from "lucide-react";
 
@@ -21,6 +22,9 @@ export default function Settings() {
       </div>
       <div>
         <SettingsCard />
+      </div>
+      <div>
+        <DeleteUserSection />
       </div>
     </div>
   );
