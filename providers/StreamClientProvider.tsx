@@ -3,6 +3,7 @@ import { tokenProvider } from "@/actions/stream.action";
 import { fetchUser } from "@/actions/user.action";
 import Loader from "@/components/Loader";
 import { StreamVideo, StreamVideoClient } from "@stream-io/video-react-sdk";
+import { useRouter } from "next/navigation";
 import { ReactNode, useEffect, useState } from "react";
 
 interface UserInfo {
@@ -18,6 +19,7 @@ interface UserInfo {
 const apiKey = process.env.NEXT_PUBLIC_STREAM_API_KEY;
 
 const StreamVideoProvider = ({ children }: { children: ReactNode }) => {
+  const router = useRouter();
   const [videoClient, setVideoClient] = useState<StreamVideoClient>();
   const [userData, setUserData] = useState<UserInfo | null>(null);
   const [loading, setLoading] = useState(true);
@@ -28,6 +30,7 @@ const StreamVideoProvider = ({ children }: { children: ReactNode }) => {
         const user = await fetchUser();
         if (!user || typeof user !== "object" || "redirect" in user) {
           console.warn("No user data found or user is a redirect object");
+          router.push("/signin");
           return;
         } else {
           setUserData(user as UserInfo);
@@ -40,7 +43,7 @@ const StreamVideoProvider = ({ children }: { children: ReactNode }) => {
     };
 
     userDataFromDb();
-  }, []);
+  }, [router]);
 
   useEffect(() => {
     if (!userData || loading) return;
