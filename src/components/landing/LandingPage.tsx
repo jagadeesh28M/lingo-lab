@@ -2,6 +2,7 @@ import HeroSection from "@/components/landing/HeroSection";
 import HeroVideoDialog from "@/components/ui/HeroVideoDialog";
 import { Poppins } from "next/font/google";
 import { AnimatedBeamDemo } from "@/components/landing/MatchingBeam";
+import homepage from "@/assets/homepage.png";
 import Image from "next/image";
 import communicate from "../../assets/communication.jpg";
 import world from "../../assets/world.jpg";
@@ -24,15 +25,15 @@ export default function LandingPage() {
         <HeroVideoDialog
           className="dark:hidden block"
           animationStyle="from-center"
-          videoSrc="https://www.youtube.com/embed/qh3NGpYRG3I?si=4rb-zSdDkVK9qxxb"
-          thumbnailSrc="https://startup-template-sage.vercel.app/hero-light.png"
+          videoSrc="https://www.youtube.com/embed/3e2V9KyE7Fg?si=MeKzi0QecII--m0S"
+          thumbnailSrc={homepage.src}
           thumbnailAlt="Hero Video"
         />
         <HeroVideoDialog
           className="hidden dark:block"
           animationStyle="from-center"
-          videoSrc="https://www.youtube.com/embed/qh3NGpYRG3I?si=4rb-zSdDkVK9qxxb"
-          thumbnailSrc="https://startup-template-sage.vercel.app/hero-dark.png"
+          videoSrc="https://www.youtube.com/embed/3e2V9KyE7Fg?si=MeKzi0QecII--m0S"
+          thumbnailSrc={homepage.src}
           thumbnailAlt="Hero Video"
         />
       </div>
