@@ -1,18 +1,18 @@
 import { getRooms } from "@/actions/room.action";
 import { syncUser } from "@/actions/user.action";
-import CreateRoom from "@/components/home/CreateRoom";
-import RoomCard from "@/components/home/RoomCard";
-import SearchFilter from "@/components/home/SearchFIlter";
 import { getServerSession } from "next-auth";
 import { redirect } from "next/navigation";
+import RoomListClient from "@/components/home/RoomListClient";
 
 export default async function Home() {
   const session = await getServerSession();
   const user = await syncUser();
   const rooms = await getRooms();
+
   if (!session) {
     return redirect("/");
   }
+
   if (user && "username" in user && user.username.startsWith("temporary-")) {
     return "";
   }
@@ -25,25 +25,7 @@ export default async function Home() {
       <p className="text-xl font-normal text-gray-400 text-left pl-10 pt-4">
         Join rooms to practice speaking with native speakers and fellow learners
       </p>
-      <SearchFilter></SearchFilter>
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 px-4 md:px-10">
-        <CreateRoom />
-        {rooms.map((room) => (
-          <RoomCard
-            key={room.id}
-            id={room.id}
-            topic={room.topic}
-            language={room.language}
-            level={room.level}
-            participants={{
-              current: room.people,
-              max: room.maxPeople,
-            }}
-            hostName={room.owner.name}
-            isLive={true}
-          />
-        ))}
-      </div>
+      <RoomListClient rooms={rooms} />
     </div>
   );
 }

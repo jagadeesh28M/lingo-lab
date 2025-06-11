@@ -1,4 +1,5 @@
 "use client";
+
 import { useState } from "react";
 import { Search, Filter, ChevronDown, X, Check } from "lucide-react";
 
@@ -12,16 +13,22 @@ interface FilterCategory {
   options: FilterOption[];
 }
 
-const SearchFilter: React.FC = () => {
-  const [searchQuery, setSearchQuery] = useState("");
+interface SearchFilterProps {
+  searchQuery: string;
+  setSearchQuery: (value: string) => void;
+  selectedFilters: Record<string, string[]>;
+  setSelectedFilters: React.Dispatch<
+    React.SetStateAction<Record<string, string[]>>
+  >;
+}
+
+const SearchFilter: React.FC<SearchFilterProps> = ({
+  searchQuery,
+  setSearchQuery,
+  selectedFilters,
+  setSelectedFilters,
+}) => {
   const [isFilterOpen, setIsFilterOpen] = useState(false);
-  const [selectedFilters, setSelectedFilters] = useState<
-    Record<string, string[]>
-  >({
-    level: [],
-    time: [],
-    participants: [],
-  });
 
   const filterCategories: FilterCategory[] = [
     {
@@ -89,6 +96,7 @@ const SearchFilter: React.FC = () => {
             <button
               className="absolute inset-y-0 right-3 flex items-center"
               onClick={() => setSearchQuery("")}
+              aria-label="Clear search"
             >
               <X size={16} className="text-slate-400 hover:text-white" />
             </button>
@@ -104,6 +112,8 @@ const SearchFilter: React.FC = () => {
                 ? "bg-indigo-600/20 border-indigo-500/50 text-indigo-300"
                 : "bg-slate-800/50 border-slate-700 text-slate-300 hover:border-slate-600"
             }`}
+            aria-expanded={isFilterOpen}
+            aria-controls="filter-dropdown"
           >
             <Filter size={18} />
             <span>Filter</span>
@@ -122,7 +132,12 @@ const SearchFilter: React.FC = () => {
 
           {/* Filter dropdown */}
           {isFilterOpen && (
-            <div className="absolute right-0 mt-2 w-72 bg-slate-900 border border-slate-800 rounded-lg shadow-xl z-50 overflow-hidden">
+            <div
+              id="filter-dropdown"
+              className="absolute right-0 mt-2 w-72 bg-slate-900 border border-slate-800 rounded-lg shadow-xl z-50 overflow-hidden"
+              role="region"
+              aria-label="Filter options"
+            >
               <div className="p-3 border-b border-slate-800">
                 <div className="flex items-center justify-between">
                   <h3 className="font-medium text-white">Filters</h3>
@@ -155,11 +170,12 @@ const SearchFilter: React.FC = () => {
                             onClick={() =>
                               toggleFilter(category.name, option.id)
                             }
-                            className={`flex items-center w-full px-2 py-1.5 rounded text-sm ${
+                            className={`flex items-center w-full px-2 py-1.5 rounded text-sm focus:outline-none ${
                               isSelected
                                 ? "bg-indigo-600/20 text-indigo-300"
                                 : "hover:bg-slate-800 text-slate-300"
                             }`}
+                            aria-pressed={isSelected}
                           >
                             <div
                               className={`w-4 h-4 mr-2 rounded border flex items-center justify-center ${
