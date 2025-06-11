@@ -3,7 +3,7 @@ import { Info } from "lucide-react";
 
 export default function Settings() {
   return (
-    <div className="min-h-[calc(100vh-5rem)] w-full bg-[#111827] p-4 md:p-10 text-white space-y-6">
+    <div className="min-h-[calc(100vh-5rem)] w-full bg-[#020617] p-4 md:p-10 text-white space-y-6">
       <div className="flex flex-col space-y-2 ">
         <h2 className="text-white font-bold text-5xl tracking-tight">
           Profile Settings

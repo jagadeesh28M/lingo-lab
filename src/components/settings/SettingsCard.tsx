@@ -5,7 +5,7 @@ import { getServerSession } from "next-auth";
 export default async function SettingsCard() {
   const session = await getServerSession();
   return (
-    <div className="h-auto w-auto bg-[#1F2937] p-6 rounded-lg">
+    <div className="h-auto w-auto bg-[#08112E] p-6 rounded-lg">
       <h3 className="text-white font-bold text-2xl tracking-tight">
         Profile Information
       </h3>
