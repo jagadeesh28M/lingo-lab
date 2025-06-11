@@ -3,28 +3,44 @@ import { useState } from "react";
 import { Trash2, AlertTriangle, Shield, X } from "lucide-react";
 import { deleteUser } from "@/actions/user.action";
 import { toast } from "sonner";
-import { useRouter } from "next/navigation";
+import { signOut } from "next-auth/react";
 
 export default function DeleteUserSection() {
-  const router = useRouter();
   const [showConfirmation, setShowConfirmation] = useState(false);
   const [confirmText, setConfirmText] = useState("");
   const [isDeleting, setIsDeleting] = useState(false);
 
   const handleDeleteAccount = async () => {
-    setIsDeleting(true);
-    const response = await deleteUser();
-    if (!response) {
-      alert("Error deleting account. Please try again later.");
-      toast.error("Error deleting account. Please try again later.");
+    try {
+      setIsDeleting(true);
+      const response = await deleteUser();
+
+      if (!response) {
+        toast.error("Error deleting account. Please try again later.");
+        setIsDeleting(false);
+        return;
+      }
+
+      document.cookie.split(";").forEach((c) => {
+        document.cookie = c
+          .replace(/^ +/, "")
+          .replace(/=.*/, "=;expires=" + new Date(0).toUTCString() + ";path=/");
+      });
+
+      localStorage.clear();
+      sessionStorage.clear();
+
+      await signOut({ callbackUrl: "/" });
+
+      toast.success("Account deleted successfully.");
+      setShowConfirmation(false);
+      setConfirmText("");
+    } catch (err) {
+      console.error("Error deleting account:", err);
+      toast.error("Unexpected error during deletion.");
+    } finally {
       setIsDeleting(false);
-      return;
     }
-    toast.success("Account deleted successfully.");
-    router.push("/signin");
-    setIsDeleting(false);
-    setShowConfirmation(false);
-    setConfirmText("");
   };
 
   const canDelete = confirmText === "DELETE";
